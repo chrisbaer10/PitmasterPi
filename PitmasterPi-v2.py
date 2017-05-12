@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
-
-import smbus
+from w1thermsensor import W1ThermSensor
 import time
 from time import sleep
 import datetime
@@ -20,7 +19,6 @@ alert_email = ''
 
 #Preset Variables
 api = xively.XivelyAPIClient(API_KEY)
-bus = smbus.SMBus(1)
 #I2C address
 address = 0x4d
 isHeating = True
@@ -62,12 +60,14 @@ def set_cooking_alert(target_temp): #Using Requests here until dweepy adds in al
         requests.get(alert_url)
 
 def get_current_temp(): 
-	data = bus.read_i2c_block_data(address, 1,2)
+	sensor = W1ThermSensor(W1ThermSensor.THERM_SENSOR_DS18B20, "0316200806ff")
+	data = sensor.get_temperature()
 	val = (data[0] << 8) + data[1]
 	return val/5.00*9.00/5.00+32.00
 
 def get_current_temp_celcius(): 
-        data = bus.read_i2c_block_data(address, 1,2)
+	sensor = W1ThermSensor(W1ThermSensor.THERM_SENSOR_DS18B20, "0316200806ff")
+	data = sensor.get_temperature(W1ThermSensor.DEGREES_F)
         val = (data[0] << 8) + data[1]
         return val/5.00   
 	
