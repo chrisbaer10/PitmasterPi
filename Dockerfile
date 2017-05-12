@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -qy \
     git \
 && pip install \
     xively-python \
-    dweepy
+    dweepy \
+    w1thermsensor
 
 RUN git clone https://github.com/chrisbaer10/PitmasterPi.git
 
