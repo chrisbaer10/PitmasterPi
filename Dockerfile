@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -qy \
     xively-python \
     dweepy
 
-RUN git clone https://github.com/justindean/PitmasterPi.git  
+RUN git clone https://github.com/chrisbaer10/PitmasterPi/blame/master/PitmasterPi-v2.py
 
 WORKDIR "PitmasterPi/"
 
